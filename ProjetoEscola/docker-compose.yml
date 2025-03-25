@@ -1,0 +1,33 @@
+# Este arquivo docker-compose.yml define a configuração para dois serviços: app e db.
+# O serviço 'app' é uma aplicação Flask que será construída a partir do Dockerfile no diretório atual.
+# Ele expõe a porta 5000 e monta o diretório atual no contêiner em /app.
+# O serviço 'db' é um banco de dados PostgreSQL que será construído a partir do Dockerfile no diretório InfraBD.
+# Ele define variáveis de ambiente para configurar o banco de dados e expõe a porta 5432.
+# O volume 'postgres_data' é usado para persistir os dados do banco de dados.
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: flask_app
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+
+  db:
+    build: ./InfraBD
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: faat
+      POSTGRES_PASSWORD: faat
+      POSTGRES_DB: northwind
+    ports:
+      - "3000:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
