@@ -13,7 +13,7 @@ Este projeto implementa um sistema completo de gestão para escola infantil, des
 - [Monitoramento](#monitoramento)
 - [Estrutura do Projeto](#estrutura-do-projeto)
 - [Exemplos de Uso](#exemplos-de-uso)
-- [Contribuição](#contribuição)
+
 
 ## 🎯 Visão Geral
 
@@ -93,6 +93,7 @@ docker-compose --version
 ```bash
 git clone https://github.com/fr3ddykf/Aula.AleTavares.git
 cd sistema-gestao-escolar
+o projeto se encontra na pasta /Projeto_Escola
 ```
 
 ### 2. Executar com Docker Compose
@@ -345,31 +346,7 @@ docker-compose exec backend python -m pytest --cov=.
 - Tempo de resposta das queries
 - Tamanho do banco de dados
 
-## 🤝 Contribuição
-
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
 ## 📄 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
 
-## 👥 Equipe
-
-- **Desenvolvedor Backend**: [Seu Nome]
-- **Disciplina**: Implementação de Software / Integração de Software
-- **Semestre**: 5º Semestre
-- **Ano**: 2024
-
-## 📞 Suporte
-
-Para dúvidas ou problemas:
-- Abra uma issue no GitHub
-- Entre em contato via email: [seu-email@exemplo.com]
-
----
-
-**Desenvolvido com ❤️ para o curso de Sistemas de Informação**
