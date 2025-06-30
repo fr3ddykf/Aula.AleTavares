@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  db:
+    build: ./InfraBD
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: faat
+      POSTGRES_PASSWORD: faat
+      POSTGRES_DB: northwind
+    ports:
+      - "3001:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - monitoring_network
+
+  prometheus:
+    build:
+      context: ./prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    networks:
+      - monitoring_network
+
+  grafana:
+    build:
+      context: ./grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - monitoring_network
+
+  postgres-exporter:
+    image: bitnami/postgres-exporter:latest
+    container_name: postgres_exporter
+    environment:
+      DATA_SOURCE_NAME: "postgresql://faat:faat@db:5432/northwind?sslmode=disable"
+    ports:
+      - "9187:9187"
+    depends_on:
+      - db
+    networks:
+      - monitoring_network
+
+volumes:
+  postgres_data:
+  grafana_data:
+
+networks:
+  monitoring_network:
+    driver: bridge
